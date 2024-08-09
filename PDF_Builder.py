@@ -104,8 +104,9 @@ def scroll_to_selected_item(event):
 
 def get_data_dropped(event):
     # print(event.data)
-    row = event.data[1: -1]
-    docs = row.split("} {")
+    docs = root.tk.splitlist(event.data)
+    # row = event.data[1: -1]
+    # docs = row.split("} {")
 
     add_elements(docs)
 
@@ -113,10 +114,7 @@ def get_data_dropped(event):
 def update_canva():
     canva_view.delete('all')
 
-    # update progressbar
-    progressbar['value'] += 1
-    progressbar.update_idletasks()
-
+    update_progressbar()
     populate_canva()
 
 
@@ -134,7 +132,6 @@ def populate_canva():
 
     canva_scrollbar_init()
     scroll_to_selected_item(event=None)
-
     update_progressbar()
 
 
@@ -170,7 +167,7 @@ def sorting(f):
 def add_elements(new_doc):
     global elements_of_listbox
 
-    if not new_doc:  # if is empty
+    if not new_doc:  # if it's empty
         new_doc = filedialog.askopenfilenames()
 
     # progressbar init
@@ -258,9 +255,11 @@ def check_for_scrollbar():
 
 def update_progressbar():
     progressbar['value'] += 1
+    print(progressbar['value'])
     progressbar.update_idletasks()
 
     if progressbar['value'] == 5:
+        progressbar['value'] = 0
         progressbar.pack_forget()
 
 
