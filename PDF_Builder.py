@@ -103,11 +103,7 @@ def scroll_to_selected_item(event):
 
 
 def get_data_dropped(event):
-    # print(event.data)
     docs = root.tk.splitlist(event.data)
-    # row = event.data[1: -1]
-    # docs = row.split("} {")
-
     add_elements(docs)
 
 
